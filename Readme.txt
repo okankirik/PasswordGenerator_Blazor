@@ -1,0 +1,1 @@
+1) Memento design pattern nedir? Bununla ilgili bir makale yazýp mediumda paylaþýlacak. 
