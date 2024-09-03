@@ -1,6 +1,8 @@
 ﻿@page "/"
 @using System.Text
 @using BlazorWasmStarter.Enums
+@inject NavigationManager Navigation
+@inject IToastService ToastService
 
 <PageTitle>Home</PageTitle>
 @* @bind:event inputa yazdığımız girdiyi aynı anda ekrana yansıtmamızı sağlıyor. Hem yazıp hem okuyor *@
@@ -38,9 +40,21 @@
             </div>
     </div>
 
-    <div>
-        <p class="mb-1 mt-3">Password Length: <b>@passwordLength</b> </p>
-        <input type="range" class="form-range" step="1" min="8" max="50" @bind="passwordLength" @bind:event="oninput" />
+    <div class="container mt-4">
+        <h5 class="mb-3">Password Length</h5>
+        <div class="row align-items-center">
+            <div class="col-md-2 mb-2 mb-md-0">
+                <input @bind=@passwordLength type="number" class="form-control" min="6" max="50" @oninput="HandlePasswordLengthInputOnChange"/>
+            </div>
+            <div class="col-md-8 mb-2 mb-md-0">
+                <input type="range" class="form-range" step="1" min="6" max="50" @bind="passwordLength" @oninput="HandleRangeOnChange" />
+            </div>
+            <div class="col-md-2">
+                <span class="badge bg-primary fs-6">@passwordLength characters</span>
+            </div>
+
+        </div>
+
     </div>
 
 
@@ -49,11 +63,11 @@
 
 <div class="card mt-3">
     <div class="card-header">
-        💾 Saved Passwords
+        <MaterialSaveIcon Width="2" Height="2" ColourCode="#6A9C89" OnClick="@HandleSaveIconClick" /> Saved Passwords
     </div>
     <div class="card-body">
         <ul class="list-group">
-            @foreach(var savedPassword in savedPasswords)
+            @foreach(var savedPassword in savedPasswords.Reverse())
             {
                 <li class="list-group-item">@savedPassword</li>
             }
@@ -90,6 +104,30 @@
         base.OnInitialized();
     }
 
+    private void HandleSaveIconClick()
+    {
+        Navigation.NavigateTo(uri: "/counter");
+    }
+
+    private void HandlePasswordLengthInputOnChange(ChangeEventArgs args)
+    {
+        if (args.Value is null)
+            return;
+
+        passwordLength = Convert.ToInt32(args.Value);
+        GeneratePassword();
+    }
+
+    private void HandleRangeOnChange(ChangeEventArgs args)
+    {
+        if (args.Value is null)
+            return;
+
+        passwordLength = Convert.ToInt32(args.Value);
+        GeneratePassword();
+    }
+
+
     private void HandleCheckboxOnChange(ChangeEventArgs args, CheckBoxActionType actionType)
     {
         if(args.Value is null)
@@ -113,6 +151,8 @@
             return;
 
         savedPasswords.Add(password);
+
+        ToastService.ShowInfo(message: "The selected password saved!");
     }
 
     // Append işlemi stringBuilder kısmında kayıtlı stringe Appendin içindeki işlemi dahil eder.(Bu örnek için random.Next(0,10) işlemini)
@@ -195,4 +235,18 @@
             onHoverGenerateCss = string.Empty;
             onHoverSaveCss = string.Empty;
     }
-}
+    }
+
+                <style>
+                .form-range::-webkit-slider-thumb {
+                    background: #0d6efd;
+                }
+
+                .form-range:-moz-range-thumb {
+                     background: #0d6efd;
+                }
+
+                .form-range::-ms-thumb {
+                background: #0d6efd;
+                }
+                </style>
