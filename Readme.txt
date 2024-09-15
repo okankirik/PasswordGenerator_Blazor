@@ -1,5 +1,5 @@
 
-This is our first project with Yazılım Academy.
+This is our first Blazor project with Yazılım Academy.
 
 In this project, the user can choose which features they want their password to include, such as numbers, lowercase, uppercase, and special characters.
 In the Password Length section, they can specify how long they want their password to be.
