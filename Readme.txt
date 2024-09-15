@@ -7,5 +7,6 @@ They can copy their created password. They can save their chosen passwords and v
 They can create a new password by replacing the passwords they don't like.
 
 
-https://github.com/okankirik/PasswordGenerator_Blazor/blob/d861a611ef39ad4d830719fcc78082ea331df605/PasswordGenerator.JPG
+![PasswordGenerator](https://github.com/user-attachments/assets/4b876a75-476b-47ab-b14b-1ba3c383c5fc)
+
 
