@@ -7,4 +7,5 @@ They can copy their created password. They can save their chosen passwords and v
 They can create a new password by replacing the passwords they don't like.
 
 
-https://github.com/user-attachments/assets/30608c41-4c3d-4d2c-97c8-c68c596c4805
+![PasswordGenerator](https://github.com/user-attachments/assets/ec829026-0175-4608-a7b7-8cf4378daba3)
+
